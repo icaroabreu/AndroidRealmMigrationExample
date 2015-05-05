@@ -19,8 +19,11 @@ import butterknife.OnClick;
 
 public class MainActivity extends Activity {
 
-    @InjectView(R.id.name)
-    EditText nameInput;
+    @InjectView(R.id.first_name)
+    EditText firstNameInput;
+
+    @InjectView(R.id.last_name)
+    EditText lastNameInput;
 
     @InjectView(R.id.list_person)
     ListView list;
@@ -51,31 +54,11 @@ public class MainActivity extends Activity {
     public void newPerson()
     {
         Person newPerson = new Person();
-        newPerson.setName(nameInput.getText().toString());
+        newPerson.setFirst_name(firstNameInput.getText().toString());
+        newPerson.setLast_name(lastNameInput.getText().toString());
         manager.storePerson(newPerson);
         adapter.notifyDataSetChanged();
-        nameInput.setText("");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        firstNameInput.setText("");
+        lastNameInput.setText("");
     }
 }

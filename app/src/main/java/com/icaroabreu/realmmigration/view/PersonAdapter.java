@@ -36,6 +36,8 @@ public class PersonAdapter extends ArrayAdapter<Person> {
 
         ViewHolder viewHolder;
 
+        Person person = persons.get(position);
+
         if(convertView != null)
         {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -48,7 +50,7 @@ public class PersonAdapter extends ArrayAdapter<Person> {
             convertView.setTag(viewHolder);
         }
 
-        viewHolder.name.setText(persons.get(position).getName());
+        viewHolder.name.setText(person.getFirst_name() + " " + person.getLast_name());
 
         return convertView;
     }

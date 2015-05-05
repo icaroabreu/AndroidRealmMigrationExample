@@ -19,7 +19,14 @@ public class DatabaseManager {
 
     public DatabaseManager(Context ctx)
     {
-        realm = Realm.getInstance(ctx);
+        try {
+            realm = Realm.getInstance(ctx);
+        }catch (RealmMigrationNeededException e){
+            String realmPath = new File(ctx.getFilesDir(), Realm.DEFAULT_REALM_NAME).getAbsolutePath();
+            Realm.migrateRealmAtPath(realmPath, new DBMigration());
+            realm = Realm.getInstance(ctx);
+        }
+
     }
 
     public void storePerson(Person person)
